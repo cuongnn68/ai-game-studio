@@ -9,14 +9,14 @@ export default function About() {
         </p>
         <p className="text-lg leading-relaxed">
           Our mission is to explore the frontier of AI-powered game development,
-          creating innovative and entertaining games that showcase what's
+          creating innovative and entertaining games that showcase what&apos;s
           possible when human creativity collaborates with machine intelligence.
         </p>
         <p className="text-lg leading-relaxed">
           Each game in our collection is designed with the help of AI tools,
           from concept generation to asset creation and gameplay mechanics.
-          We're constantly experimenting with new AI technologies to push the
-          boundaries of what's possible in game development.
+          We&apos;re constantly experimenting with new AI technologies to push
+          the boundaries of what&apos;s possible in game development.
         </p>
       </div>
     </div>

@@ -38,7 +38,7 @@ export default function FlappyBird() {
   const gameState = useRef({
     birdY: 250,
     birdVelocity: 0,
-    pipes: [] as { x: number; topHeight: number }[],
+    pipes: [] as { x: number; topHeight: number; scored?: boolean }[],
     wingFlap: 0,
   });
 
@@ -84,7 +84,7 @@ export default function FlappyBird() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let lastPipeTime = 0;
+    // Remove unused variable
 
     const addPipe = () => {
       const topHeight = Math.random() * (canvas.height - PIPE_GAP - 100) + 50;
@@ -495,7 +495,12 @@ export default function FlappyBird() {
       }
 
       // Helper function to draw clouds
-      function drawCloud(ctx, x, y, size) {
+      function drawCloud(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        size: number
+      ): void {
         const numCircles = 5;
         for (let i = 0; i < numCircles; i++) {
           const circleX = x + (i - numCircles / 2) * (size / numCircles);
@@ -803,12 +808,7 @@ export default function FlappyBird() {
             ctx.fillStyle = "#A0522D";
 
             // Top asteroid
-            drawAsteroid(
-              ctx,
-              pipe.x + PIPE_WIDTH / 2,
-              pipe.topHeight / 2,
-              pipe.topHeight
-            );
+            drawAsteroid(ctx, pipe.x + PIPE_WIDTH / 2, pipe.topHeight / 2);
 
             // Bottom asteroid
             drawAsteroid(
@@ -816,8 +816,7 @@ export default function FlappyBird() {
               pipe.x + PIPE_WIDTH / 2,
               pipe.topHeight +
                 PIPE_GAP +
-                (canvas.height - (pipe.topHeight + PIPE_GAP)) / 2,
-              canvas.height - (pipe.topHeight + PIPE_GAP)
+                (canvas.height - (pipe.topHeight + PIPE_GAP)) / 2
             );
             break;
 
@@ -929,7 +928,11 @@ export default function FlappyBird() {
       });
 
       // Helper functions for drawing obstacles
-      function drawAsteroid(ctx, centerX, centerY, height) {
+      function drawAsteroid(
+        ctx: CanvasRenderingContext2D,
+        centerX: number,
+        centerY: number
+      ): void {
         const radius = PIPE_WIDTH * 0.8;
         ctx.fillStyle = "#A0522D";
         ctx.beginPath();
@@ -963,7 +966,13 @@ export default function FlappyBird() {
         }
       }
 
-      function drawTree(ctx, x, y, width, height) {
+      function drawTree(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+      ): void {
         // Tree trunk
         ctx.fillStyle = "#8B4513";
         ctx.fillRect(x + width / 3, y, width / 3, height);
@@ -1012,7 +1021,13 @@ export default function FlappyBird() {
         }
       }
 
-      function drawFirePillar(ctx, x, y, width, height) {
+      function drawFirePillar(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+      ): void {
         // Base structure (dark stone)
         ctx.fillStyle = "#444";
         ctx.fillRect(x, y, width, height);
@@ -1052,7 +1067,13 @@ export default function FlappyBird() {
         }
       }
 
-      function drawHauntedTower(ctx, x, y, width, height) {
+      function drawHauntedTower(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+      ): void {
         // Main tower structure
         ctx.fillStyle = "#483D8B";
         ctx.fillRect(x, y, width, height);
@@ -1096,7 +1117,13 @@ export default function FlappyBird() {
         }
       }
 
-      function drawPaperShredder(ctx, x, y, width, height) {
+      function drawPaperShredder(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+      ): void {
         // Main structure
         ctx.fillStyle = "#A9A9A9";
         ctx.fillRect(x, y, width, height);
@@ -1140,7 +1167,13 @@ export default function FlappyBird() {
         }
       }
 
-      function drawPin(ctx, x, y, width, height) {
+      function drawPin(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+      ): void {
         // Pin body
         ctx.fillStyle = "#C0C0C0";
 
@@ -1205,7 +1238,13 @@ export default function FlappyBird() {
         }
       }
 
-      function drawElectricBarrier(ctx, x, y, width, height) {
+      function drawElectricBarrier(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+      ): void {
         // Main structure
         ctx.fillStyle = "#444";
         ctx.fillRect(x, y, width, height);
@@ -1255,7 +1294,13 @@ export default function FlappyBird() {
         }
       }
 
-      function drawAlienStructure(ctx, x, y, width, height) {
+      function drawAlienStructure(
+        ctx: CanvasRenderingContext2D,
+        x: number,
+        y: number,
+        width: number,
+        height: number
+      ): void {
         // Main structure
         const gradient = ctx.createLinearGradient(x, y, x + width, y + height);
         gradient.addColorStop(0, "#1A237E");
@@ -1309,29 +1354,8 @@ export default function FlappyBird() {
         );
       }
 
-      return (
-        <>
-          <ThemeSelector
-            currentTheme={currentTheme}
-            onThemeChange={setCurrentTheme}
-          />
-          <canvas
-            ref={canvasRef}
-            width={800}
-            height={600}
-            className="border border-gray-600 rounded-lg shadow-lg"
-          />
-          {gameOver && showLeaderboard && (
-            <HighScoreSubmenu
-              onSave={handleSaveScore}
-              onClose={handleCloseLeaderboard}
-            />
-          )}
-          {showLeaderboard && <Leaderboard scores={scores} />}
-        </>
-      );
-
-      if (gameOver) {
+      // Draw game over text
+      if (gameOver && ctx) {
         ctx.fillStyle = "white";
         ctx.font = "30px Arial";
         ctx.fillText(
@@ -1351,6 +1375,37 @@ export default function FlappyBird() {
           canvas.height / 2 + 50
         );
       }
+
+      return (
+        <div className="container mx-auto px-4 py-8 flex flex-col items-center relative">
+          <ThemeSelector
+            currentTheme={currentTheme}
+            onThemeChange={setCurrentTheme}
+          />
+          <h1 className="text-3xl font-bold mb-6">Flappy Bird</h1>
+          <canvas
+            ref={canvasRef}
+            width={400}
+            height={500}
+            className="border border-gray-300 rounded-lg"
+          />
+          {!gameOver && gameStarted && <HighScoreSubmenu scores={scores} />}
+          {gameOver && showLeaderboard && (
+            <HighScoreSubmenu
+              scores={scores}
+              onSave={handleSaveScore}
+              onClose={handleCloseLeaderboard}
+            />
+          )}
+          <Leaderboard
+            isOpen={showLeaderboard}
+            currentScore={score}
+            onClose={handleCloseLeaderboard}
+            onSubmit={handleSaveScore}
+            scores={scores}
+          />
+        </div>
+      );
     };
 
     const gameLoop = () => {
@@ -1386,7 +1441,17 @@ export default function FlappyBird() {
       canvas.removeEventListener("click", handleClick);
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [gameStarted, gameOver, score, currentTheme]);
+  }, [
+    gameStarted,
+    gameOver,
+    score,
+    currentTheme,
+    setShowLeaderboard,
+    setScore,
+    handleSaveScore,
+    scores,
+    showLeaderboard,
+  ]);
 
   return (
     <div className="container mx-auto px-4 py-8 flex flex-col items-center relative">

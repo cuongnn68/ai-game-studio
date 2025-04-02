@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-type Score = {
+export type Score = {
   name: string;
   score: number;
   date: string;
