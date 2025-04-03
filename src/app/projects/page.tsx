@@ -22,6 +22,45 @@ export default function Projects() {
           </a>
         </div>
         <div className="border border-black/[.08] dark:border-white/[.145] rounded-lg p-6 hover:shadow-md transition-shadow">
+          <h2 className="text-xl font-semibold mb-3">Snake Game</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            Control a snake as it grows longer by eating food. Avoid hitting
+            walls and yourself in this AI-enhanced classic.
+          </p>
+          <a
+            href="/snake"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Play Now →
+          </a>
+        </div>
+        <div className="border border-black/[.08] dark:border-white/[.145] rounded-lg p-6 hover:shadow-md transition-shadow">
+          <h2 className="text-xl font-semibold mb-3">Tetris</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            Arrange falling blocks to create complete lines in this AI-enhanced
+            version of the iconic puzzle game.
+          </p>
+          <a
+            href="/tetris"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Play Now →
+          </a>
+        </div>
+        <div className="border border-black/[.08] dark:border-white/[.145] rounded-lg p-6 hover:shadow-md transition-shadow">
+          <h2 className="text-xl font-semibold mb-3">Memory Card Game</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">
+            Test your memory by matching pairs of cards. Features multiple
+            difficulty levels and a scoring system.
+          </p>
+          <a
+            href="/memory-card"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Play Now →
+          </a>
+        </div>
+        <div className="border border-black/[.08] dark:border-white/[.145] rounded-lg p-6 hover:shadow-md transition-shadow">
           <h2 className="text-xl font-semibold mb-3">Cosmic Defender</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
             An AI-generated space shooter with procedurally generated levels and
